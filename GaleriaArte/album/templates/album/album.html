@@ -1,0 +1,188 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'album/css/album.css' %}">
+
+<!-- Hero Section -->
+<section class="album-hero">
+    <h1 class="album-title">Colección de Arte</h1>
+    <p class="album-subtitle">Explora nuestra exclusiva selección de obras contemporáneas y clásicas</p>
+</section>
+
+<!-- 🔍 Filtros -->
+<section class="filter-section">
+    <div class="filter-container">
+        <form method="get" class="filter-form">
+            <div class="filter-group">
+                <label for="categoria">Categoría:</label>
+                <select name="categoria" id="categoria">
+                    <option value="">Todas</option>
+                    {% for cat in categorias %}
+                        <option value="{{ cat.id }}" {% if categoria_seleccionada == cat.id %}selected{% endif %}>
+                            {{ cat.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="artista">Artista:</label>
+                <select name="artista" id="artista">
+                    <option value="">Todos</option>
+                    {% for art in artistas %}
+                        <option value="{{ art.id }}" {% if artista_seleccionado == art.id %}selected{% endif %}>
+                            {{ art.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="filter-btn">Filtrar</button>
+            <a href="{% url 'album' %}" class="reset-btn">Limpiar</a>
+        </form>
+    </div>
+</section>
+
+<!-- Galería -->
+<section class="gallery-section">
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            {% for obra in obras %}
+            <div class="artwork-card" 
+                 data-title="{{ obra.titulo }}"
+                 data-artist="{{ obra.artista }}"
+                 data-year="{{ obra.year }}"
+                 data-medium="{{ obra.tecnica }}"
+                 data-dimensions="{{ obra.dimensiones }}"
+                 data-description="{{ obra.descripcion }}"
+                 data-image="{{ obra.imagen.url }}">
+                <img src="{{ obra.imagen.url }}" alt="{{ obra.titulo }}" class="artwork-image">
+                <div class="artwork-details">
+                    <h3 class="artwork-name">{{ obra.titulo }}</h3>
+                    <p class="artwork-meta">{{ obra.artista }} • {{ obra.year }}</p>
+                    <button class="like-btn">
+                        <i class="fas fa-heart"></i>
+                        <span class="likes-count">{{ obra.likes }}</span>
+                    </button>
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align:center; grid-column:1/-1; color:#94a3b8;">
+                No hay obras disponibles en este momento.
+            </p>
+            {% endfor %}
+        </div>
+
+        {% if obras.has_other_pages %}
+        <div class="pagination">
+            {% if obras.has_previous %}
+                <a href="?page=1">&laquo; Primera</a>
+                <a href="?page={{ obras.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            {% for num in obras.paginator.page_range %}
+                {% if obras.number == num %}
+                    <span class="current">{{ num }}</span>
+                {% elif num > obras.number|add:'-3' and num < obras.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if obras.has_next %}
+                <a href="?page={{ obras.next_page_number }}">Siguiente</a>
+                <a href="?page={{ obras.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="artworkModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <div class="modal-image-container">
+                <img id="modalImage" src="" class="modal-image" alt="Obra de arte">
+            </div>
+            <div class="modal-info">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <div class="modal-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">Artista</div>
+                        <div id="modalArtist" class="meta-value"></div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Año</div>
+                        <div id="modalYear" class="meta-value"></div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Técnica</div>
+                        <div id="modalMedium" class="meta-value"></div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Dimensiones</div>
+                        <div id="modalDimensions" class="meta-value"></div>
+                    </div>
+                </div>
+                <p id="modalDescription" class="modal-description"></p>
+                <div class="modal-actions">
+                    <button class="action-btn"><i class="fas fa-heart"></i> Me Gusta</button>
+                    <button class="action-btn"><i class="fas fa-share-alt"></i> Compartir</button>
+                    <button class="action-btn"><i class="fas fa-download"></i> Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'album/css/js/album.js' %}"></script>
+
+<style>
+/* --- estilos básicos del filtro --- */
+.filter-section {
+    margin: 30px 0;
+    text-align: center;
+}
+.filter-container {
+    display: inline-block;
+    background: #f8fafc;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.filter-form {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.filter-group label {
+    font-weight: 500;
+    margin-right: 5px;
+    color: #1e293b;
+}
+.filter-group select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+}
+.filter-btn, .reset-btn {
+    background: #1e293b;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.reset-btn {
+    background: #94a3b8;
+    text-decoration: none;
+}
+.filter-btn:hover { background: #334155; }
+.reset-btn:hover { background: #64748b; }
+</style>
+{% endblock %}

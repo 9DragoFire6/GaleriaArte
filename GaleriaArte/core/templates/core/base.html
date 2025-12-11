@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Galería de Arte - Obras Exclusivas{% endblock %}</title>
+    <meta name="description" content="Galería de arte contemporáneo con obras exclusivas y diseño minimalista">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    {% include 'includes/banner.html' %}
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Galería de Arte</h1>
+            <ul class="nav-menu">
+                <li><a href="{% url 'index' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Inicio</a>
+                </li>
+                <li><a href="{% url 'album' %}"
+                        class="nav-link {% if 'album' in request.path %}active{% endif %}">Album</a></li>
+                <li><a href="{% url 'preguntas' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'preguntas' %}active{% endif %}">Preguntas
+                        Frecuentes</a></li>
+                <li><a href="{% url 'contacto' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">Contacto</a>
+                </li>
+                <li><a href="{% url 'info' %}"
+                        class="nav-link {% if request.resolver_match.url_name == 'info' %}active{% endif %}">Quienes
+                        Somos</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tickets_api_cliente' %}">
+                        Tareas (API)
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Site Info (from context processor) -->
+    <section class="site-info" style="text-align:center; margin:10px 0;">
+        <div class="site-stats" style="margin-top:5px; font-size:14px; color:#888;">
+            Obras totales: {{ total_artworks }} &nbsp;|&nbsp;
+            Likes acumulados: {{ total_likes }}
+        </div>
+    </section>
+
+
+    <!-- Main Content -->
+    <main>
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block extra_content %}
+        {% endblock %}
+    </main>
+
+    <!-- Social Media & Contact Section -->
+    <section class="social-section">
+        <div class="social-container">
+            <div class="section-header">
+                <h2 class="section-title">Conecta Conmigo</h2>
+                <p class="section-subtitle">Sígueme en redes sociales y mantente al día con mis últimas creaciones
+                    artísticas</p>
+            </div>
+
+            <div class="social-grid">
+                <div class="social-card facebook">
+                    <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+                    <div class="social-info">
+                        <h3>Facebook</h3>
+                        <p class="follower-count">15,240 seguidores</p>
+                        <button class="social-btn">Seguir</button>
+                    </div>
+                </div>
+
+                <div class="social-card instagram">
+                    <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                    <div class="social-info">
+                        <h3>Instagram</h3>
+                        <p class="follower-count">22,180 seguidores</p>
+                        <button class="social-btn">Seguir</button>
+                    </div>
+                </div>
+
+                <div class="social-card twitter">
+                    <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                    <div class="social-info">
+                        <h3>Twitter</h3>
+                        <p class="follower-count">8,950 seguidores</p>
+                        <button class="social-btn">Seguir</button>
+                    </div>
+                </div>
+
+                <div class="social-card linkedin">
+                    <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="social-info">
+                        <h3>LinkedIn</h3>
+                        <p class="follower-count">5,670 conexiones</p>
+                        <button class="social-btn">Conectar</button>
+                    </div>
+                </div>
+
+                <div class="social-card youtube">
+                    <div class="social-icon"><i class="fab fa-youtube"></i></div>
+                    <div class="social-info">
+                        <h3>YouTube</h3>
+                        <p class="follower-count">12,450 suscriptores</p>
+                        <button class="social-btn">Suscribirse</button>
+                    </div>
+                </div>
+
+                <div class="social-card tiktok">
+                    <div class="social-icon"><i class="fab fa-tiktok"></i></div>
+                    <div class="social-info">
+                        <h3>TikTok</h3>
+                        <p class="follower-count">18,720 seguidores</p>
+                        <button class="social-btn">Seguir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                &copy; {{ current_year }} {{ site_title }}. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Auto-hide messages after 5 seconds
+        setTimeout(() => {
+            const messages = document.querySelectorAll('.alert');
+            messages.forEach(msg => msg.style.display = 'none');
+        }, 5000);
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

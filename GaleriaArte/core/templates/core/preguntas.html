@@ -1,0 +1,144 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="album-hero">
+    <div class="hero-container">
+        <h1 class="album-title">Preguntas Frecuentes</h1>
+    </div>
+</section>
+    <div class="faq-item">
+        <div class="question">¿Qué tipo de obras se exhiben en la galería?</div>
+        <div class="answer">Nuestra galería presenta obras de arte contemporáneo, incluyendo pintura, escultura y fotografía de artistas locales e internacionales.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">¿Cómo se seleccionan las obras que se muestran?</div>
+        <div class="answer">Las obras se seleccionan cuidadosamente por nuestro equipo de expertos en arte, con el objetivo de ofrecer una representación diversa y enriquecedora de distintas corrientes artísticas, estilos y épocas. No todas las obras de un artista se incluyen; solo aquellas que cumplen criterios de relevancia y valor artístico.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">¿Se puede visitar la galería de forma física?</div>
+        <div class="answer">Actualmente, nuestra galería es completamente virtual y no ofrece visitas físicas. Sin embargo, trabajamos para que la experiencia online sea lo más cercana posible a una visita presencial, con descripciones detalladas y alta calidad visual de cada obra.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">¿Puedo obtener información sobre los artistas?</div>
+        <div class="answer">Cada obra incluye información relevante sobre su creador, como biografía resumida, trayectoria artística y logros importantes, lo que permite comprender mejor el contexto de la obra.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">¿La información sobre las obras está actualizada?</div>
+        <div class="answer">Nuestro equipo revisa constantemente las descripciones, biografías y datos históricos para garantizar que la información presentada sea precisa y confiable.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">¿Puedo sugerir una obra o artista para incluir en la galería?</div>
+        <div class="answer">Puedes enviarnos tus sugerencias a través del formulario de contacto, indicando la obra o artista y referencias relevantes. Nuestro equipo evaluará cada propuesta según criterios de calidad y relevancia artística.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">¿Cómo puedo aprender más sobre el contexto o técnica de una obra?</div>
+        <div class="answer">Cada descripción incluye referencias y enlaces a recursos confiables donde se amplía la información sobre la técnica, el estilo y el contexto histórico, permitiendo a los visitantes profundizar en el conocimiento del arte.</div>
+    </div>
+</section>
+
+</section>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #475569;
+    background: #fefefe;
+}
+
+.album-hero {
+    background: linear-gradient(135deg, #f8f0f5 0%, #f0f4f8 50%, #f7f8fa 100%);
+    padding: 100px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.album-hero {
+    background: linear-gradient(135deg, #f8f0f5 0%, #f0f4f8 50%, #f7f8fa 100%);
+    padding: 100px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.album-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    letter-spacing: -0.02em;
+}
+
+.album-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(226, 210, 224, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(212, 227, 240, 0.3) 0%, transparent 50%);
+}
+
+.faq-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    transition: background-color 0.3s;
+}
+
+.faq-item:hover {
+    background-color: #e0e0e0;
+}
+
+.question {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.answer {
+    display: none;
+    margin-top: 10px;
+    color: #555;
+}
+
+.faq-item.active .answer {
+    display: block;
+}
+</style>
+
+<script>
+// Script simple para mostrar/ocultar respuestas al hacer click en la pregunta
+document.addEventListener("DOMContentLoaded", function() {
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach(item => {
+        item.querySelector('.question').addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section with Main Artwork -->
+<section class="album-hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <h2 class="hero-title">Obra Destacada</h2>
+            <p class="hero-subtitle">Descubre la belleza en cada trazo, la emoción en cada color</p>
+        </div>
+
+        <!-- Featured Artwork -->
+        <div class="artwork-container">
+            <div class="artwork-frame">
+                <img src="/media/obras/Die-Pferde-des-Neptun-2.jpg"
+                     alt="Obra de Arte Principal"
+                     class="main-artwork">
+
+                <div class="artwork-info">
+                    <h3 class="artwork-title">"Los Caballos de Neptuno - Walter Crane"</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% if curiosidades %}
+<style>
+    .curiosidades-section {
+        margin: 60px auto;
+        max-width: 900px;
+        padding: 30px;
+        background-color: #fafafa;
+        border-radius: 12px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .curiosidades-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 25px;
+        color: #1e293b;
+        position: relative;
+        opacity: 0;
+        animation: revealText 1.2s ease-out forwards;
+    }
+
+    .curiosidades-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #1e293b, transparent);
+    }
+
+    .curiosidades-list {
+        display: grid;
+        gap: 20px;
+    }
+
+    .curiosidad-item {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .curiosidad-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .curiosidad-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        transition: left 0.8s ease;
+    }
+
+    .curiosidad-item:hover::before {
+        left: 100%;
+    }
+
+    .curiosidad-item h3 {
+        margin-bottom: 10px;
+        color: #0f172a;
+        position: relative;
+        display: inline-block;
+    }
+
+    .curiosidad-item h3::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #8b5a2b;
+        transition: width 0.4s ease;
+    }
+
+    .curiosidad-item:hover h3::after {
+        width: 100%;
+    }
+
+    .curiosidad-item .pregunta {
+        font-style: italic;
+        color: #475569;
+        margin-bottom: 8px;
+        position: relative;
+        padding-left: 15px;
+    }
+
+    .curiosidad-item .respuesta {
+        margin-bottom: 10px;
+        color: #334155;
+        position: relative;
+        padding-left: 15px;
+    }
+
+    .curiosidad-item .detalle {
+        font-size: 0.85rem;
+        color: #64748b;
+        border-top: 1px dashed #e2e8f0;
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @keyframes revealText {
+        0% {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const curiosidadItems = document.querySelectorAll('.curiosidad-item');
+
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function animateOnScroll() {
+        curiosidadItems.forEach((item, index) => {
+            if (isInViewport(item)) {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 150);
+            }
+        });
+    }
+
+    animateOnScroll();
+    window.addEventListener('scroll', animateOnScroll);
+});
+</script>
+
+<section class="curiosidades-section">
+    <h2>Curiosidades de las Obras</h2>
+    <div class="curiosidades-list">
+        {% for c in curiosidades %}
+        <div class="curiosidad-item">
+            <h3>{{ c.titulo }}</h3>
+            <p class="pregunta"><em>{{ c.pregunta }}</em></p>
+            <p class="respuesta">{{ c.respuesta }}</p>
+            <p class="detalle">Autor: {{ c.autor }} | {{ c.fecha_publicacion|date:"d/m/Y H:i" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+</section>
+{% endblock %}

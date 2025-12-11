@@ -1,0 +1,9 @@
+.banner {
+    background-image: url('/media/obras/angelic-banner-have-two-angels-and-a-face-in-the-middle-of-the-image-vintage-engraving-vector.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    padding: 60px 20px;
+    color: white;
+    text-align: center;
+}

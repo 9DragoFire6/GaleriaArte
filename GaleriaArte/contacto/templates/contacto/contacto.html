@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'contacto/css/contacto.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-header">
+            <h2>Contáctanos</h2>
+            <p>¿Tienes una consulta o te interesa una obra? Escríbenos y te responderemos pronto.</p>
+        </div>
+
+        <div class="contact-card">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="id_nombre">Nombre completo</label>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">Correo electrónico</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_asunto">Asunto</label>
+                        {{ form.asunto }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_motivo">Motivo del contacto</label>
+                        {{ form.motivo }}
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="id_mensaje">Mensaje</label>
+                        {{ form.mensaje }}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-contact">Enviar mensaje</button>
+                </div>
+            </form>
+
+            {% if messages %}
+                <div class="message-container">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

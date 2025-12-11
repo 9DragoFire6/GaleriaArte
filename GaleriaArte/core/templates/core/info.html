@@ -1,0 +1,242 @@
+{% extends 'core/base.html' %}
+{% block content  %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Arte - Quiénes Somos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #475569;
+            background: #fefefe;
+        }
+
+        .album-hero {
+            background: linear-gradient(135deg, #f8f0f5 0%, #f0f4f8 50%, #f7f8fa 100%);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .album-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(226, 210, 224, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(212, 227, 240, 0.3) 0%, transparent 50%);
+        }
+        
+        .hero-container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .album-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            letter-spacing: -0.02em;
+        }
+        
+        .album-subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+        
+        .gallery-section {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(71, 85, 105, 0.08);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .about-details {
+            padding: 2.5rem;
+            background: #fefefe;
+        }
+        
+        .about-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+            text-align: center;
+        }
+        
+        .about-text {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        @media (max-width: 768px) {
+            .album-title {
+                font-size: 2.75rem;
+            }
+            
+            .album-subtitle {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .about-details {
+                padding: 1.8rem;
+            }
+            
+            .about-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .album-hero {
+                padding: 60px 20px;
+            }
+            
+            .album-title {
+                font-size: 2.25rem;
+            }
+            
+            .gallery-section {
+                padding: 60px 20px;
+            }
+            
+            .about-details {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="album-hero">
+        <div class="hero-container">
+            <h1 class="album-title">Quiénes Somos</h1>
+            <p class="album-subtitle">Fans del arte que dan visibilidad a artistas mostrando sus obras en línea.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <div class="about-card">
+                <img src="https://1819.es/wp-content/uploads/2024/08/Comunidad-para-aficionados-al-arte.jpg" 
+                     alt="Nuestra comunidad de arte" class="about-image">
+                <div class="about-details">
+                    <h3 class="about-name">Vitrina Viva</h3>
+                    <p class="about-text">Somos un grupo de fans apasionados por el arte en todas sus formas. Nos une el deseo de dar visibilidad
+                         y reconocimiento a artistas de distintos rincones del mundo, desde talentos emergentes hasta creadores consagrados. 
+                         Esta página nació como un espacio digital donde el arte respira, se comparte y se celebra.
+                    </p>
+                    <p class="about-text">Creemos que cada obra cuenta una historia, y queremos que esas historias lleguen a más personas. 
+                         Por eso, reunimos con entusiasmo pinturas, ilustraciones, fotografías, esculturas y más, para que el talento no pase desapercibido. 
+                         Aquí, cada artista tiene su lugar, y cada visitante puede descubrir algo que lo inspire.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}
+
+{% block extra_content %}
+<section class="values-banner">
+<h3 class="about-name">Nuestros Valores</h3>
+  <div class="value-row">🎨 Inclusión: El arte es para todos.</div>
+  <div class="value-row">🧠 Autenticidad: Cada obra cuenta una verdad.</div>
+  <div class="value-row">🤝 Colaboración: Juntos creamos más.</div>
+  <div class="value-row">🚀 Innovación: Exploramos nuevas formas de expresión.</div>
+  <div class="value-row">🌍 Respeto: Celebramos la diversidad artística.</div>
+</section>
+
+<style>
+  .values-banner {
+    background: linear-gradient(to right, #f0f4f8, #e2e8f0);
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .value-row {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: transform 0.3s ease;
+  }
+
+  .value-row:hover {
+    transform: scale(1.02);
+    color: #0f172a;
+  }
+
+  @media (max-width: 768px) {
+    .value-row {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .values-banner {
+      padding: 40px 15px;
+    }
+
+    .value-row {
+      font-size: 1rem;
+    }
+  }
+</style>
+{% endblock %}
+
+

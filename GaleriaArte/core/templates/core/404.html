@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obra No Encontrada - Galería de Arte</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="marmol" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23f5f5f5" width="100" height="100"/><path fill="%23e0e0e0" d="M0 0h100v100H0z"/><path fill="%23d0d0d0" d="M20 0h10v100H20zM50 0h5v100H50zM0 30h100v10H0zM0 60h100v10H0z"/></pattern></defs><rect fill="url(%23marmol)" width="100" height="100"/></svg>');
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #2c2c2c;
+        }
+        .error-container {
+            background: white;
+            border-radius: 8px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: #2c2c2c;
+        }
+        .error-message {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        .error-submessage {
+            font-size: 1rem;
+            margin-bottom: 40px;
+            color: #5a5a5a;
+            line-height: 1.6;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #2c2c2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 2px solid #2c2c2c;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .btn:hover {
+            background: transparent;
+            color: #2c2c2c;
+            transform: translateY(-2px);
+        }
+        @keyframes fadeInUp {
+            from {opacity: 0; transform: translateY(30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>404</h1>
+        <p class="error-message">La Obra Clásica que Buscas No Existe</p>
+        <p class="error-submessage">
+            Como las ruinas del Partenón, algunas obras se pierden en el tiempo.<br>
+            Te invitamos a explorar nuestra colección de tesoros artísticos.
+        </p>
+        <a href="/" class="btn">↑ Volver al Olimpo</a>
+    </div>
+</body>
+</html>

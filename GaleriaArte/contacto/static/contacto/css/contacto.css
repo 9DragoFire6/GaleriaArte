@@ -1,0 +1,124 @@
+
+/* =======================
+   FORMULARIO DE CONTACTO
+   ======================= */
+.contact-section {
+    margin-top: 5px;
+    padding: 80px 20px;
+    background-color: #f9f7f5;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-container {
+    max-width: 900px;
+    width: 100%;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.contact-header p {
+    font-family: 'Inter', sans-serif;
+    color: #666;
+    font-size: 1rem;
+}
+
+.contact-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 40px 50px;
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 6px;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #b48b57;
+    box-shadow: 0 0 0 3px rgba(180, 139, 87, 0.2);
+    outline: none;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-contact {
+    background-color: #b48b57;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-contact:hover {
+    background-color: #9c784d;
+    transform: translateY(-2px);
+}
+
+.message-container {
+    margin-top: 20px;
+}
+
+.alert {
+    background-color: #f8f4ef;
+    color: #4a3b27;
+    border: 1px solid #e0d5c8;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+}
